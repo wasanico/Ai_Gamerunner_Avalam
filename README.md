@@ -1,40 +1,37 @@
-# AI Project AVALAM
+# AIGameRunner
 
-Samelson Nicolas - 17288  
-Pinto Pedro - 17010
+## Installation
 
-## Programming language used :
+Clone the repository on your computer
 
-Python 3.7.5
+## Add Games
 
-## Libraries used :
+Add a script in the `/public/games` directory
 
-* cherrypy
-* json
-* socket
-* sys
-* math 
-* os
-* msgpack
-* Random 
+## Create an AI
 
-## AI strategy:
+An AI is a web server similar to the ones you can find in the `/ai` directory
 
-Before playing, the AI will choose a depth of moves ahead of the current game 
-depending on the advancement of the game. Starting by a depth of 3, going up to 4
-and then when there isn't a lot of possibilities it will decrease.
+## Start the Front End
 
-After choosing it's depth it will choose the best move to do fo the AI to mark the best score.
-For it to happen, we used minimax and alpha beta prunning:
+The `server.py` file is a small server that serve the frontend.
 
-1. At the deepest depth, or the leaves, it will check the state of the board and
-calculate a score. For each pawn tower, it will add an amount of points,
-if the height is between 1 and 4 and the score will be of 1 point, 
-depending on the top pawn of the tower, +1 for the colour of the AI and -1
-if it's the colour of the ennemy. If the height is 5, then it will add +5 or -5
-depending on the top pawn of the tower
+It need python 3.X and `cherrypy`. You can start it with:
 
-1. With the score of each possible move on the leaves, the algorythm Minimax will run and 
-maximize the AI and minimize the player. Alpha Beta is implemented to prune some leaves and 
-optimize a lot the process.
+```
+python server.py game
+```
 
+Where `game` must be replaced by one of the games defined in `/public/games`
+
+## Subscribe
+
+Send a TCP message to the 3001 port with a JSON content like:
+
+```json
+{
+	"matricules": ["11111", "22222"],
+	"port": 1234,
+	"name": "Terminator"
+}
+```
